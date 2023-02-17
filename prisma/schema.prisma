@@ -9,3 +9,10 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Tutorial {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  url         String @unique
+}

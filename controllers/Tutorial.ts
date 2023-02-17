@@ -3,8 +3,19 @@ import { NextFunction, Request, Response } from "express";
 import prisma from "../prisma";
 
 async function getTutorials(req: Request, res: Response, next: NextFunction) {
+  const search = req.query.search;
+
   try {
-    const tutorials = await prisma.tutorial.findMany();
+    const tutorials = search
+      ? await prisma.tutorial.findMany({
+          where: {
+            OR: [
+              { title: { contains: search.toString() } },
+              { description: { contains: search.toString() } },
+            ],
+          },
+        })
+      : await prisma.tutorial.findMany();
     return res.json(tutorials);
   } catch (err: any) {
     next(err);

@@ -4,13 +4,16 @@ GET http://localhost:8000
 GET http://localhost:8000/tutorials
 ###
 
+GET http://localhost:8000/tutorials?search=react
+###
+
 POST http://localhost:8000/tutorials
 Content-Type: application/json
 
 {
-    "title": "Prisma ORM",
-    "description": "In this Quickstart guide, you'll learn how to get started with Prisma from scratch using a plain TypeScript project and a local SQLite database file. It covers data modeling, migrations and querying a database.",
-    "url": "https://www.prisma.io/docs/getting-started/quickstart"
+    "title": "React JS",
+    "description": "In this tutorial, we’ll show how to build an interactive tic-tac-toe game with React.",
+    "url": "https://pt-br.reactjs.org/tutorial/tutorial.html"
 }
 ###
 

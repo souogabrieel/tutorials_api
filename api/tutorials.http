@@ -1,0 +1,30 @@
+GET http://localhost:8000
+###
+
+GET http://localhost:8000/tutorials
+###
+
+POST http://localhost:8000/tutorials
+Content-Type: application/json
+
+{
+    "title": "Prisma ORM",
+    "description": "In this Quickstart guide, you'll learn how to get started with Prisma from scratch using a plain TypeScript project and a local SQLite database file. It covers data modeling, migrations and querying a database.",
+    "url": "https://www.prisma.io/docs/getting-started/quickstart"
+}
+###
+
+GET http://localhost:8000/tutorials/1
+###
+
+PUT http://localhost:8000/tutorials/1
+Content-Type: application/json
+
+{
+    "title": "Prisma ORM (edit)",
+    "description": "In this Quickstart guide, you'll learn how to get started with Prisma from scratch using a plain TypeScript project and a local SQLite database file. It covers data modeling, migrations and querying a database.",
+    "url": "https://www.prisma.io/docs/getting-started/quickstart"
+}
+###
+
+DELETE http://localhost:8000/tutorials/1

@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 
 import routes from "./routes";
+import middlewares from "./middlewares";
 
 const app = express();
 const port = 8000;
@@ -12,5 +13,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/tutorials", routes.tutorialRouter);
+app.use(middlewares.errorHandling);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

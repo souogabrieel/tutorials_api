@@ -8,6 +8,8 @@ const port = 8000;
 
 app.use(express.json());
 
+app.use(middlewares.pagination);
+
 app.get("/", (req: Request, res: Response) => {
   return res.json({ message: "Welcome to tutorials API" });
 });

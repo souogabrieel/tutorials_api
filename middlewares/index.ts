@@ -1,3 +1,4 @@
 import errorHandling from "./error";
+import pagination from "./pagination";
 
-export default { errorHandling };
+export default { errorHandling, pagination };

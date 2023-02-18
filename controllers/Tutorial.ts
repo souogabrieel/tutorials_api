@@ -1,21 +1,24 @@
 import { NextFunction, Request, Response } from "express";
+import { Prisma, Tutorial } from "@prisma/client";
 
 import prisma from "../prisma";
 
 async function getTutorials(req: Request, res: Response, next: NextFunction) {
-  const search = req.query.search;
+  const search = req.query.search || "";
 
   try {
-    const tutorials = search
-      ? await prisma.tutorial.findMany({
-          where: {
-            OR: [
-              { title: { contains: search.toString() } },
-              { description: { contains: search.toString() } },
-            ],
-          },
-        })
-      : await prisma.tutorial.findMany();
+    const tutorials = await req.paginate<Tutorial, Prisma.TutorialFindManyArgs>(
+      prisma.tutorial,
+      {
+        where: {
+          OR: [
+            { title: { contains: search.toString() } },
+            { description: { contains: search.toString() } },
+          ],
+        },
+      }
+    );
+
     return res.json(tutorials);
   } catch (err: any) {
     next(err);

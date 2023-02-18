@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { Prisma } from "@prisma/client";
+import { ValidationError } from "joi";
 
 function errorHandling(
   err: any,
@@ -10,12 +11,11 @@ function errorHandling(
 ) {
   let code;
 
-  console.log(err);
-
   if (
     err instanceof Prisma.PrismaClientKnownRequestError ||
     err instanceof Prisma.PrismaClientUnknownRequestError ||
-    err instanceof Prisma.PrismaClientValidationError
+    err instanceof Prisma.PrismaClientValidationError ||
+    err instanceof ValidationError
   ) {
     code = StatusCodes.BAD_REQUEST;
   } else {

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Prisma, Tutorial } from "@prisma/client";
 
 import prisma from "../prisma";
+import models from "../models";
 
 async function getTutorials(req: Request, res: Response, next: NextFunction) {
   const search = req.query.search || "";
@@ -38,6 +39,8 @@ async function getTutorial(req: Request, res: Response, next: NextFunction) {
 
 async function createTutorial(req: Request, res: Response, next: NextFunction) {
   try {
+    await models.Tutorial.validateAsync({ ...req.body });
+
     const tutorial = await prisma.tutorial.create({ data: { ...req.body } });
     return res.json(tutorial);
   } catch (err) {
@@ -47,6 +50,8 @@ async function createTutorial(req: Request, res: Response, next: NextFunction) {
 
 async function updateTutorial(req: Request, res: Response, next: NextFunction) {
   try {
+    await models.Tutorial.validateAsync({ ...req.body });
+
     const tutorial = await prisma.tutorial.update({
       where: { id: parseInt(req.params.id) },
       data: { ...req.body },
